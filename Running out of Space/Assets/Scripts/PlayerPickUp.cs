@@ -18,7 +18,7 @@ public class PlayerPickUp : MonoBehaviour {
         if (collision.gameObject.CompareTag("Item"))
         {
             collision.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
-            if (Input.GetKeyDown("space"))
+            if (Input.GetMouseButtonDown(0))
             {
                 inventory.AddItem(item);
             }
@@ -28,7 +28,7 @@ public class PlayerPickUp : MonoBehaviour {
     private void OnTriggerStay2D(Collider2D collision)
     {
         IInventoryItem item = collision.gameObject.GetComponent<IInventoryItem>();
-        if (Input.GetKeyDown("space"))
+        if (Input.GetMouseButtonDown(0))
         {
             inventory.AddItem(item);
         }
@@ -41,5 +41,6 @@ public class PlayerPickUp : MonoBehaviour {
             collision.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
+
 
 }

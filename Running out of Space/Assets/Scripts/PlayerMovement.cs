@@ -36,12 +36,4 @@ public class PlayerMovement : MonoBehaviour {
         rb.velocity = movement * speed;
     }
 
-    // Rotation of player
-    void Rotation()
-    {
-        // Find mouse position
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        // Rotate charcter to face mouse
-        transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
-    }
 }
