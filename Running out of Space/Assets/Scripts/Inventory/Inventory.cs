@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Inventory: MonoBehaviour
+public class Inventory : MonoBehaviour
 {
     private const int SLOTS = 8;
 
@@ -11,11 +11,12 @@ public class Inventory: MonoBehaviour
 
     public event EventHandler<InventoryEventArgs> ItemAdded;
 
+    public event EventHandler<InventoryEventArgs> ItemRemoved;
 
     // NEED TO CHANGE COLLIDERS TO 2D
     public void AddItem(IInventoryItem item)
     {
-        if(mItems.Count < SLOTS)
+        if (mItems.Count < SLOTS)
         {
             Collider2D collider = (item as MonoBehaviour).GetComponent<Collider2D>();
             if (collider.enabled)
@@ -24,11 +25,33 @@ public class Inventory: MonoBehaviour
                 mItems.Add(item);
                 item.OnPickup();
 
-                if(ItemAdded != null)
+                if (ItemAdded != null)
                 {
                     ItemAdded(this, new InventoryEventArgs(item));
                 }
             }
         }
+    }
+
+    public void RemoveItem(IInventoryItem item)
+    {
+        if (mItems.Contains(item))
+        {
+            mItems.Remove(item);
+
+            item.OnDrop();
+
+            Collider2D collider = (item as MonoBehaviour).GetComponent<Collider2D>();
+            if (collider != null)
+            {
+                collider.enabled = true;
+            }
+
+            if (ItemRemoved != null)
+            {
+                ItemRemoved(this, new InventoryEventArgs(item));
+            }
+        }
+
     }
 }

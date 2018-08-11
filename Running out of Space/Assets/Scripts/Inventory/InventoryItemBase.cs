@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item : MonoBehaviour, IInventoryItem
-{
+public class InventoryItemBase : MonoBehaviour, IInventoryItem {
 
-    public string Name
+    public virtual string Name
     {
         get
         {
-            return "Item";
+            return "_base item_";
         }
     }
 
-    public Sprite _Image = null;
+    public Sprite _Image;
 
     public Sprite Image
     {
@@ -23,11 +22,13 @@ public class Item : MonoBehaviour, IInventoryItem
         }
     }
 
-    public void OnPickup()
+    public virtual void OnPickup()
     {
         gameObject.SetActive(false);
     }
+
+    public virtual void OnDrop()
+    {
+        gameObject.SetActive(true);
+    }
 }
-
-
-
