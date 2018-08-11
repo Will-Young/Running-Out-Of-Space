@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - DropPoint
+  - Item
   layers:
   - Default
   - TransparentFX
@@ -13,8 +16,8 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
+  - Player
+  - Ground
   - 
   - 
   - 
@@ -40,4 +43,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 1265236461
+    locked: 0
+  - name: ItemPlacement
+    uniqueID: 2626162781
+    locked: 0
+  - name: Items
+    uniqueID: 1851983593
+    locked: 0
+  - name: Player
+    uniqueID: 1217610985
     locked: 0

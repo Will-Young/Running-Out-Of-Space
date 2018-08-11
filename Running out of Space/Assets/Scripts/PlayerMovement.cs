@@ -22,8 +22,10 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         Movement();
+        //Rotation();
 	}
 
+    // Movement of player
     void Movement()
     {
         moveHorizontal = Input.GetAxis("Horizontal");
@@ -32,5 +34,14 @@ public class PlayerMovement : MonoBehaviour {
         movement = new Vector2(moveHorizontal, moveVertical);
 
         rb.velocity = movement * speed;
+    }
+
+    // Rotation of player
+    void Rotation()
+    {
+        // Find mouse position
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        // Rotate charcter to face mouse
+        transform.rotation = Quaternion.LookRotation(Vector3.forward, mousePos - transform.position);
     }
 }

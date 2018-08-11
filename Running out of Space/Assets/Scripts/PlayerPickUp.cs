@@ -4,13 +4,42 @@ using UnityEngine;
 
 public class PlayerPickUp : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public Inventory inventory;
+
+    private void Update()
+    {
+        //ItemPosition();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        IInventoryItem item = collision.gameObject.GetComponent<IInventoryItem>();
+
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.blue;
+            if (Input.GetKeyDown("space"))
+            {
+                inventory.AddItem(item);
+            }
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        IInventoryItem item = collision.gameObject.GetComponent<IInventoryItem>();
+        if (Input.GetKeyDown("space"))
+        {
+            inventory.AddItem(item);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            collision.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
+
 }
